@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
         case ADD_TODO:
             return { todos: [...state.todos, action.payload]}
         case TOGGLE_COMPLETED:
-            console.log('toggle completed triggered', action)
+            return { todos: [...state.todos, action.payload]}
         default:
             return state;
     }
