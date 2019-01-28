@@ -5,9 +5,15 @@ import { addTodo, toggleCompleted } from '../../actions';
 
 class Todo extends React.Component{
 
-    handleSubmit = (e) => {
+    handleSubmit = e => {
         e.preventDefault();
         this.props.addTodo(e.target.task.value)
+    }
+
+    handleComplete = (e,todo) => {
+        e.preventDefault()
+        console.log('is clicked')
+        this.props.toggleCompleted(todo)
     }
 
     render(){
@@ -15,7 +21,7 @@ class Todo extends React.Component{
         <div>
             <h1>Todo List</h1>
             {this.props.todos.map(todo => {
-                console.log(todo)
+                return <h2 onClick={e => this.handleComplete(e,todo)}> {todo.task} </h2>
             })}
             <form onSubmit={(e) => this.handleSubmit(e)}>
                 <input type="text" name="task" placeholder="Task Name"/>
