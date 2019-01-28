@@ -1,4 +1,4 @@
-import {} from '../actions';
+import { addTodo, toggleCompleted } from '../actions';
 
 const initialState = {
     todos: [
@@ -12,6 +12,10 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch(action.type) {
+        case addTodo:
+            console.log('add todo triggered', action)
+        case toggleCompleted:
+            console.log('toggle completed triggered', action)
         default:
             return state;
     }

@@ -1,13 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { addTodo, toggleCompleted } from '../../actions';
+
 class Todo extends React.Component{
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.addTodo(e.target.task.value)
+    }
 
     render(){
        return(
         <div>
             <h1>Todo List</h1>
-            <form>
+            {this.props.todos.map(todo => {
+                console.log(todo)
+            })}
+            <form onSubmit={(e) => this.handleSubmit(e)}>
                 <input type="text" name="task" placeholder="Task Name"/>
                 <button type="submit">Add Todo</button>
             </form>
@@ -23,4 +33,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {/* actions */})(Todo)
+export default connect(mapStateToProps, { addTodo, toggleCompleted })(Todo)
