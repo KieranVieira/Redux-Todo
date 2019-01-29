@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { addTodo, toggleCompleted } from '../../actions';
+import { addTodo, toggleCompleted, clearCompleted } from '../../actions';
 
 class Todo extends React.Component{
 
@@ -17,6 +17,11 @@ class Todo extends React.Component{
         this.props.toggleCompleted(todo)
     }
 
+    clearCompleted = (e) => {
+        e.preventDefault();
+        this.props.clearCompleted()
+    }
+
     render(){
        return(
         <div>
@@ -27,6 +32,7 @@ class Todo extends React.Component{
             <form onSubmit={(e) => this.handleSubmit(e)}>
                 <input type="text" name="task" placeholder="Task Name"/>
                 <button type="submit">Add Todo</button>
+                <button onClick={(e) => this.clearCompleted(e)}>Clear Completed</button>
             </form>
         </div>
        ) 
@@ -40,4 +46,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { addTodo, toggleCompleted })(Todo)
+export default connect(mapStateToProps, { addTodo, toggleCompleted, clearCompleted })(Todo)

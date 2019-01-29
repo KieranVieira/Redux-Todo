@@ -1,5 +1,6 @@
 export const ADD_TODO = 'ADD_TODO';
 export const TOGGLE_COMPLETED = 'TOGGLE_COMPLETED';
+export const CLEAR_COMPLETED = 'CLEAR_COMPLETED'
 
 export const addTodo = task => {
     return{
@@ -19,5 +20,11 @@ export const toggleCompleted = todo => {
             ...todo,
             completed: !todo.completed
         }
+    }
+}
+
+export const clearCompleted = todo => {
+    return{
+        type: CLEAR_COMPLETED,
     }
 }
