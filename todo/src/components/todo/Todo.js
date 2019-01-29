@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { addTodo, toggleCompleted, clearCompleted } from '../../actions';
+import { addTodo, toggleCompleted, clearCompleted, deleteTask } from '../../actions';
 
 class Todo extends React.Component{
 
@@ -13,7 +13,6 @@ class Todo extends React.Component{
 
     handleComplete = (e,todo) => {
         e.preventDefault()
-        console.log(todo)
         this.props.toggleCompleted(todo)
     }
 
@@ -22,15 +21,29 @@ class Todo extends React.Component{
         this.props.clearCompleted()
     }
 
+    deleteTodo = (e,todo) => {
+        e.preventDefault();
+        this.props.deleteTask(todo)
+    }
+
     render(){
        return(
         <div>
             <h1>Todo List</h1>
             {this.props.todos.map(todo => {
-                return <h2 onClick={e => this.handleComplete(e,todo)} style={{textDecoration: todo.completed ? 'line-through' : 'none'}}> {todo.task} </h2>
+                return (
+                <>
+                    <h2 
+                    onClick={e => this.handleComplete(e,todo)} 
+                    style={{textDecoration: todo.completed ? 'line-through' : 'none'}}>
+                    {todo.task}
+                    </h2>
+                    <button onClick={e => this.deleteTodo(e, todo)}>x</button>
+                </>
+                )
             })}
             <form onSubmit={(e) => this.handleSubmit(e)}>
-                <input type="text" name="task" placeholder="Task Name"/>
+                <input type="text" name="task" placeholder="Task Name" required/>
                 <button type="submit">Add Todo</button>
                 <button onClick={(e) => this.clearCompleted(e)}>Clear Completed</button>
             </form>
@@ -46,4 +59,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { addTodo, toggleCompleted, clearCompleted })(Todo)
+export default connect(mapStateToProps, { addTodo, toggleCompleted, clearCompleted, deleteTask })(Todo)

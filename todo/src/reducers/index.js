@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_COMPLETED, CLEAR_COMPLETED } from '../actions';
+import { ADD_TODO, TOGGLE_COMPLETED, CLEAR_COMPLETED, DELETE_TASK } from '../actions';
 
 const initialState = {
     todos: [
@@ -10,10 +10,8 @@ const initialState = {
     ]
 }
 
-
-
 export default (state = initialState, action) => {
-    console.log(action.payload)
+    console.log(action)
     switch(action.type) {
         case ADD_TODO:
             return { todos: [...state.todos, action.payload]}
@@ -32,6 +30,16 @@ export default (state = initialState, action) => {
                     return !todo.completed
                 })
             }
+        case DELETE_TASK:
+            return {
+                ...state,
+                todos: [...state.todos.filter(todo => {
+                if(todo.id === action.payload.id){
+                    return false
+                }else{
+                    return true
+                }
+            })]}
         default:
             return state;
     }

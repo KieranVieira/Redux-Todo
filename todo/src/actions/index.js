@@ -1,6 +1,7 @@
 export const ADD_TODO = 'ADD_TODO';
 export const TOGGLE_COMPLETED = 'TOGGLE_COMPLETED';
-export const CLEAR_COMPLETED = 'CLEAR_COMPLETED'
+export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';
+export const DELETE_TASK = 'DELETE_TASK'
 
 export const addTodo = task => {
     return{
@@ -26,5 +27,12 @@ export const toggleCompleted = todo => {
 export const clearCompleted = todo => {
     return{
         type: CLEAR_COMPLETED,
+    }
+}
+
+export const deleteTask = todo => {
+    return{
+        type: DELETE_TASK,
+        payload: {...todo}
     }
 }
